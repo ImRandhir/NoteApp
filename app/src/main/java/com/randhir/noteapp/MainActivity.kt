@@ -19,7 +19,9 @@ import com.randhir.noteapp.model.Note
 import com.randhir.noteapp.screen.NoteScreen
 import com.randhir.noteapp.screen.NoteViewModel
 import com.randhir.noteapp.ui.theme.NoteAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint // Hilt
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

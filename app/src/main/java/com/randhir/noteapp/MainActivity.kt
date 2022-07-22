@@ -12,9 +12,12 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.randhir.noteapp.data.NotesDataSource
 import com.randhir.noteapp.model.Note
 import com.randhir.noteapp.screen.NoteScreen
+import com.randhir.noteapp.screen.NoteViewModel
 import com.randhir.noteapp.ui.theme.NoteAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -27,16 +30,23 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background) {
 
-                    val notes = remember {
-                        mutableStateListOf<Note>()
-                    }
+                    NotesApp()
 
-                    NoteScreen(notes = notes /* For testing UI-  NotesDataSource().loadNotes() */,
-                        onAddNote = {notes.add(it)}, onRemoveNote = {notes.remove(it)})
+
                 }
             }
         }
     }
+}
+
+@Composable
+fun NotesApp(noteViewModel: NoteViewModel = viewModel()){
+
+    val notesList = noteViewModel.getAllNotes()
+
+    NoteScreen(notes = notesList ,
+        onAddNote = {noteViewModel.addNote(it)}, onRemoveNote = {noteViewModel.removeNote(it)})
+
 }
 
 

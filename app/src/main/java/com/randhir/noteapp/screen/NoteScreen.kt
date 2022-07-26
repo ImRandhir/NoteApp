@@ -1,5 +1,6 @@
 package com.randhir.noteapp.screen
 
+import android.icu.text.SimpleDateFormat
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -29,7 +30,10 @@ import com.randhir.noteapp.components.NoteButton
 import com.randhir.noteapp.components.NoteInputText
 import com.randhir.noteapp.data.NotesDataSource
 import com.randhir.noteapp.model.Note
+import com.randhir.noteapp.util.formatDate
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 
 // We will put this note screen in NoteApp theme in main activity , less code in Main Activity :)
@@ -109,6 +113,9 @@ fun NoteRow(modifier: Modifier = Modifier,
             note: Note,
             onNoteClicked: (Note) -> Unit){
 
+    val current = LocalDateTime.now()
+    val formatter = DateTimeFormatter.ofPattern("EEE, dd MMM")
+
     Surface(
         modifier
             .padding(4.dp)
@@ -127,14 +134,13 @@ fun NoteRow(modifier: Modifier = Modifier,
             Text(text = note.description,
                  style = MaterialTheme.typography.subtitle1)
 
-            Text(text = note.entryDate.format(DateTimeFormatter.ofPattern("EEE, d MMM")),
+            Text(text = formatDate(note.entryDate.time),
                 style = MaterialTheme.typography.caption)
+
 
         }
     }
 }
-
-
 
 
 

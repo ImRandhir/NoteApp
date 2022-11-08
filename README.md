@@ -1,6 +1,6 @@
 # NoteApp
 
 * ViewModel
-* Hilt
+* Dagger-Hilt
 * Room Database
 * Kotlin Coroutines
